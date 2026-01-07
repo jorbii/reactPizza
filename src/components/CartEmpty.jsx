@@ -7,13 +7,13 @@ export const CartEmpty = () => {
   return (
 <>
     <div class="cart cart--empty">
-        <h2>Корзина пустая</h2>
-        <p>Вероятней всего, вы не заказывали еще пиццу.<br/>
-           Для того, чтобы заказать пиццу, перейди на главную страницу,
+        <h2>Cart is empty</h2>
+        <p>Most likely, you haven't ordered a pizza yet.<br/>
+           To order a pizza, go to the main page,
         </p>
         <img src={cartEmptyImg}/>
         <Link to="/" class="button button--black">
-        <span>Вернуться назад</span>
+        <span>Go back</span>
         </Link>
     </div>
 </>

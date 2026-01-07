@@ -1,30 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit'
+
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from "axios";
+
+// бізнес логіка запросу даних і переробка в ссилку для витягнення певной піци
+export const fetchPizzas = createAsyncThunk('pizza/fetchPizzasStatus', async({params, thunkApi}) => { 
+    const { order, sortBy, category, search, currentPage} = params;
+    const {data} = await axios.get(
+      `https://68fdc9817c700772bb11ec50.mockapi.io/Items?page=${currentPage}&limit=4${category}&sortBy=${sortBy}&order=${order}${search}`
+     );
+    return data;
+  }
+)
 
 const initialState = {
-  value: 0,
-}
+  items:[],
+  status: 'loading',
+  
+};
 
-export const pizzasSlice = createSlice({
-  name: 'counter',
+const pizzasSlice = createSlice({
+  name: 'pizza',
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1
-    },
-    decrement: (state) => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
-    },
+    setItems(state, action) {
+      state.items = action.payload;
+    },  
   },
-})
+    extraReducers: (builder) => {
+      builder
+        .addCase(fetchPizzas.pending, (state) => {
+          state.status = 'loading';
+          state.items = [];
+      })
+        .addCase(fetchPizzas.fulfilled, (state, action) => {
+          state.items = action.payload;
+          state.status = 'success';
+      })
+        .addCase(fetchPizzas.rejected, (state) => {
+        state.status = 'error';
+        state.items = [];
+      });
+  },
+});
 
-// Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = pizzasSlice.actions
+export const pizzaSelektor = (state) => state.pizza;
 
-export default pizzasSlice.reducer
+export const {setItems} = pizzasSlice.actions;
+export default pizzasSlice.reducer;

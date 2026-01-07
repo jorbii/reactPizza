@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {clearItem} from '../Redux/Slices/cartsSlice';
+import {clearItem, cartSelektor} from '../Redux/Slices/cartsSlice';
 
 import CartItem from '../components/CartItem';
 import CartEmpty from '../components/CartEmpty';
@@ -14,7 +14,7 @@ import CartEmpty from '../components/CartEmpty';
 
 export const Cart = (id,) => {
   const dispatch = useDispatch();
-  const {totalPrice, items} = useSelector(state => state.cart);
+  const {totalPrice, items} = useSelector(cartSelektor);
   const totalCount = items.reduce((sum, item) => sum + item.count , 0);
 
     const OnClickClear = () => {
@@ -35,7 +35,7 @@ export const Cart = (id,) => {
 <path d="M14.3333 16.3333C15.0697 16.3333 15.6667 15.7364 15.6667 15C15.6667 14.2636 15.0697 13.6667 14.3333 13.6667C13.597 13.6667 13 14.2636 13 15C13 15.7364 13.597 16.3333 14.3333 16.3333Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M4.78002 4.99999H16.3334L15.2134 10.5933C15.1524 10.9003 14.9854 11.176 14.7417 11.3722C14.4979 11.5684 14.1929 11.6727 13.88 11.6667H6.83335C6.50781 11.6694 6.1925 11.553 5.94689 11.3393C5.70128 11.1256 5.54233 10.8295 5.50002 10.5067L4.48669 2.82666C4.44466 2.50615 4.28764 2.21182 4.04482 1.99844C3.80201 1.78505 3.48994 1.66715 3.16669 1.66666H1.66669" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
- Корзина</h2>
+ cart</h2>
               <div onClick={OnClickClear} className="cart__clear">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M2.5 5H4.16667H17.5" stroke="#B6B6B6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -44,7 +44,7 @@ export const Cart = (id,) => {
 <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-                <span>Очистить корзину</span>
+                <span>Clear cart</span>
               </div>
             </div>
             <div className="content__items">
@@ -57,8 +57,8 @@ export const Cart = (id,) => {
             </div>
             <div className="cart__bottom">
               <div className="cart__bottom-details">
-                <span> Всего пицц: <b>{totalCount} шт.</b> </span>
-                <span> Сумма заказа: <b>{totalPrice} ₽</b> </span>
+                <span> Total pizzas: <b>{totalCount} pcs.</b> </span>
+                <span> Order amount: <b>{totalPrice} $</b> </span>
               </div>
               <div className="cart__bottom-buttons">
                 <Link to="/" className="button button--outline button--add go-back-btn">
@@ -66,10 +66,10 @@ export const Cart = (id,) => {
 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-                  <span>Вернуться назад</span>
+                  <span>Go back</span>
                 </Link>
                 <div className="button pay-btn">
-                  <span>Оплатить сейчас</span>
+                  <span>Pay now</span>
                 </div>
               </div>
             </div>

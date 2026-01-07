@@ -14,9 +14,12 @@ import { addItem, minusItem, removeItem} from '../Redux/Slices/cartsSlice';
     );
   };
 
-   const onClickMinus = () => {
-    dispatch(minusItem(id));
-  };
+  
+  const onClickMinus = () => {
+    if (count > 0) {
+      dispatch(minusItem(id))
+    }
+  }
 
   const OnClickRemoveItem = () => {
     dispatch(removeItem(id));
@@ -35,7 +38,7 @@ import { addItem, minusItem, removeItem} from '../Redux/Slices/cartsSlice';
   </div>
   <div className="cart__item-info">
     <h3>{title}</h3>
-    <p>{type}, {size} см.</p>
+    <p>{type}, {size} cm.</p>
   </div>
   <div className="cart__item-count">
     <div onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
@@ -55,7 +58,7 @@ import { addItem, minusItem, removeItem} from '../Redux/Slices/cartsSlice';
     </div>
   </div>
   <div className="cart__item-price">
-    <b>{price * count} ₽</b>
+    <b>{price * count} $</b>
   </div>
   <div className="cart__item-remove">
     <div onClick={OnClickRemoveItem} className="button button--outline button--circle">

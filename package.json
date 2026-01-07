@@ -8,6 +8,10 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "axios": "^1.13.2",
     "gh-pages": "^6.3.0",
     "lodash.debounce": "^4.0.8",
@@ -20,17 +24,17 @@
     "react-router-dom": "^7.9.5",
     "react-scripts": "5.0.1",
     "sass": "^1.93.2",
+    "typescript": "^5.9.3",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "https://jorbii.github.io/reactPizza",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "homepage": "https://jorbii.github.io/reactPizza"
-
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

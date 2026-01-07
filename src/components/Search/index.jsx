@@ -41,7 +41,7 @@ export const Search = () => {
                 value={localValue}
                 onChange={onChangeInput}
                 className={styles.input}
-                placeholder="Поиск пиццы ..."
+                placeholder="Pizza search ..."
             />
             {localValue && (
                 <svg

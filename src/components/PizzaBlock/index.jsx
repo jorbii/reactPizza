@@ -2,14 +2,15 @@ import React from 'react';
 
 import { useDispatch ,useSelector } from 'react-redux';
 
-import {addItem} from '../../Redux/Slices/cartsSlice'
+import {addItem, selectCartItemById} from '../../Redux/Slices/cartsSlice'
+import { Link } from 'react-router-dom';
 
-const typeNames = ['тонкое', 'традиционное']
-const sizeValues = ['тонкое', 'традиционное']
+const typeNames = ['thin', 'traditional']
+const sizeValues = ['thin', 'traditional']
 
 function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
     const dispatch = useDispatch();
-    const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id));
+    const cartItem = useSelector(selectCartItemById(id));
     const [activeType, setActiveType] = React.useState(0);
     const [activeSize, setActiveSize] = React.useState(0);
     
@@ -36,11 +37,13 @@ function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
   return(
     <div className="pizza-block-wrapper">
             <div className="pizza-block">
+      <Link to={`/pizza/${id}`}>
         <img
           className="pizza-block__image"
           src={image}
           alt="Pizza"
         />
+      </Link>
         <h4 className="pizza-block__title">{title}</h4>
         <div className="pizza-block__selector">
           <ul>
@@ -59,13 +62,13 @@ function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
               key={size}
               onClick ={() => setActiveSize(index)} 
               className={activeSize === index ? 'active' : ''}>
-              {size}см.
+              {size}cm.
               </li>
             ))}
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">coast {price}</div>
+          <div className="pizza-block__price">coast {price} $ </div>
           <button onClick={onClickAdd} className="button button--outline button--add">
             <svg
               width="12"
@@ -79,7 +82,7 @@ function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
                 fill="white"
               />
             </svg>
-            <span>Добавить</span>
+            <span>Add</span>
            {addedCount > 0 && <i>0</i>}
           </button>
         </div>
