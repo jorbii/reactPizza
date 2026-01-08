@@ -2,7 +2,13 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from './pagination.module.scss';
 
-export const Pagination = ({ currentPage, onChangePage, pageCount = 3 }) => {
+type PaginationProps = {
+ currentPage: number ;
+ onChangePage: (page: number) => void;
+ pageCount: number;
+}
+
+export const Pagination: React.FC<PaginationProps> = ({ currentPage, onChangePage, pageCount = 3 }) => {
   // локальний selected (0-based для ReactPaginate)
   const [selected, setSelected] = React.useState(currentPage - 1);
 
@@ -16,7 +22,7 @@ export const Pagination = ({ currentPage, onChangePage, pageCount = 3 }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
-  const handlePageChange = (event) => {
+  const handlePageChange = (event:any) => {
     const newSelected = event.selected;
     // якщо та сама сторінка — не диспатчимо
     if (newSelected === selected) return;
@@ -32,7 +38,7 @@ export const Pagination = ({ currentPage, onChangePage, pageCount = 3 }) => {
       breakLabel="..."
       nextLabel=">"
       previousLabel="<"
-      onPageChange={handlePageChange}
+      onPageChange={(event) => onChangePage(event.selected + 1)}
       pageRangeDisplayed={4}
       pageCount={pageCount}
       forcePage={selected} // тепер forcePage керується локальним станом

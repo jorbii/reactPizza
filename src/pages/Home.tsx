@@ -8,13 +8,13 @@ import { fetchPizzas, pizzaSelektor} from '../Redux/Slices/pizzasSlice'
 import {Link, useNavigate} from 'react-router-dom';
 import QueryString from "qs";
 
-import PizzaBlock from '../components/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Categories from '../components/Categories';
-import {list, Sort} from '../components/Sort';
-import Pagination from "../components/Pagination/index";
+import PizzaBlock from '../components/PizzaBlock/index.tsx';
+import Skeleton from '../components/PizzaBlock/Skeleton.tsx';
+import Categories from '../components/Categories.tsx';
+import {list, Sort} from '../components/Sort.tsx';
+import Pagination from "../components/Pagination/index.tsx";
 
-export const Home = () => {
+export const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,7 +29,7 @@ export const Home = () => {
 
   const [totalPages, setTotalPages] = React.useState(3);
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id:number) => {
     dispatch(setCategoryId(id));
     dispatch(setCurrentPage(1));
   };
@@ -50,7 +50,7 @@ export const Home = () => {
     }
   }, []);
 
-  const onChangePage = (pageNumber) => {
+  const onChangePage = (pageNumber: number) => {
       dispatch(setCurrentPage(pageNumber));
   };
 
@@ -65,6 +65,7 @@ export const Home = () => {
     
 
       dispatch(
+        //@ts-ignore
       fetchPizzas({
         params: {
           order,
@@ -100,7 +101,7 @@ export const Home = () => {
   isMounted.current = true;
   }, [searchValue, currentPage ,categoryId, sortType,]);
 
-  const pizzas = items.map((obj) => (
+  const pizzas = items.map((obj: any) => (
     <PizzaBlock key={obj.id}
       {...obj}
       image={obj.imageUrl}/>
@@ -111,7 +112,7 @@ export const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort value={sortType} onChangeSort={(i) => dispatch(setSort(i))} />
+        <Sort value={sortType} onChangeSort={(i: number) => dispatch(setSort(i))} />
       </div>
 
       <h2 className="content__title">All pizzas</h2>

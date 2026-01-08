@@ -1,8 +1,8 @@
 import './App.css';
-import Header from './pages/Header';
-import Home from './pages/Home';
-import Cart from './pages/Cart'
-import NotFound from './pages/NotFound';
+import Header from './pages/Header.tsx';
+import Home from './pages/Home.tsx';
+import Cart from './pages/Cart.tsx'
+import NotFound from './pages/NotFound.jsx';
 import FullPizza from './pages/FullPizza.tsx';
 
 import './scss/app.scss';

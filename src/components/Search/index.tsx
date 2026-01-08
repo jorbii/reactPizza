@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEventHandler } from "react";
 import debounce from "lodash.debounce";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchValue } from "../../Redux/Slices/filterSlice";
@@ -6,29 +6,30 @@ import { setSearchValue } from "../../Redux/Slices/filterSlice";
 import styles from './Search.module.scss';
 
 
-export const Search = () => {
+export const Search:React.FC = () => {
     const dispatch = useDispatch();
-    const searchValue = useSelector((state) => state.filter.searchValue);
-    const inputRef = React.useRef();
+    const searchValue = useSelector((state:any) => state.filter.searchValue);
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
     const [localValue, setLocalValue] = React.useState('');
 
-    const onClikerClear = () => {
+    const onClikerClear = (event:React.MouseEvent<SVGSVGElement>) => {
+        console.log(event);
         setLocalValue('');
         dispatch(setSearchValue (''));
-        inputRef.current.focus();
+        inputRef.current?.focus();
     };
 
     const updateSearch = React.useCallback(
-        debounce((str) => {
+        debounce((str:string) => {
             dispatch(setSearchValue(str));
         }, 500),
         []
     );
 
-    const onChangeInput = (e) => {
-        setLocalValue(e.target.value);
-        updateSearch(e.target.value);
+    const onChangeInput = (event:React.ChangeEvent<HTMLInputElement>) => {
+        setLocalValue(event.target.value);
+        updateSearch(event.target.value);
     };
 
    

@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import {cartSelektor} from '../Redux/Slices/cartsSlice'
 
 import logoSvg from '../assets/img/pizza-logo.svg';
-import {Search} from '../components/Search/index';
+import {Search} from '../components/Search/index.tsx';
 //import Button from './Button';
 
-function Header() {
+const Header: React.FC = () => {
   const { items,totalPrice } = useSelector(cartSelektor);
   const location = useLocation();
 
-  const totalCount = items.reduce((sum, item) => sum + item.count , 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count , 0);
 
 
   return (

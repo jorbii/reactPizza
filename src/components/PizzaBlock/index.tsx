@@ -8,13 +8,24 @@ import { Link } from 'react-router-dom';
 const typeNames = ['thin', 'traditional']
 const sizeValues = ['thin', 'traditional']
 
-function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
+type PizzaBlockProps = {
+  imageUrl: string;
+  rating: number;
+  id: string;
+  price: number;
+  title: string;
+  sizes: number[];
+  types: number[];
+}
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({imageUrl,rating,id,price, title, sizes, types}) => {
     const dispatch = useDispatch();
     const cartItem = useSelector(selectCartItemById(id));
-    const [activeType, setActiveType] = React.useState(0);
-    const [activeSize, setActiveSize] = React.useState(0);
+    const [activeType, setActiveType] = React.useState<number>(0);
+    const [activeSize, setActiveSize] = React.useState<number>(0);
     
-    const addedCount = cartItem ? cartItem.count : 0;
+    const addedCount = cartItem?.count ?? 0;
+
       
 
 
@@ -23,7 +34,6 @@ function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
         id: id + '_' + activeType + '_' + activeSize,
         title,
         price,
-        image,
         imageUrl,
         type: typeNames [activeType],
         size: sizes [activeSize],
@@ -40,7 +50,7 @@ function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
       <Link to={`/pizza/${id}`}>
         <img
           className="pizza-block__image"
-          src={image}
+          src={imageUrl}
           alt="Pizza"
         />
       </Link>
@@ -83,7 +93,7 @@ function PizzaBlock ({imageUrl,rating,id,price, title, image, sizes, types}) {
               />
             </svg>
             <span>Add</span>
-           {addedCount > 0 && <i>0</i>}
+           {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
