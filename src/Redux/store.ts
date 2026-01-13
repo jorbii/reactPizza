@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import filterReducer from './Slices/filterSlice'
-import cartSlice from './Slices/cartsSlice'
-import pizzasSlice from './Slices/pizzasSlice'
+import filterReducer from './Slices/filterSlice.ts'
+import cartSlice from './Slices/cartsSlice.ts'
+import pizzasSlice from './Slices/pizzasSlice.ts'
 
 export const store = configureStore({
   reducer: {
@@ -11,5 +11,5 @@ export const store = configureStore({
   },
 })
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;

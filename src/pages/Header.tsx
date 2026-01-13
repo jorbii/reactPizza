@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {cartSelektor} from '../Redux/Slices/cartsSlice'
+import {cartSelektor} from '../Redux/Slices/cartsSlice.ts'
 
 import logoSvg from '../assets/img/pizza-logo.svg';
 import {Search} from '../components/Search/index.tsx';
-//import Button from './Button';
+
 
 const Header: React.FC = () => {
   const { items,totalPrice } = useSelector(cartSelektor);

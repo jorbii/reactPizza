@@ -1,20 +1,22 @@
 import React from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { setSort, selectSort } from '../Redux/Slices/filterSlice'
+import { setSort, selectSort, Sort, SortPropertyEnam } from '../Redux/Slices/filterSlice.ts'
 
 
   type ListItem = {
     name: string;
-    sortProperty: string;
+    sortProperty: SortPropertyEnam;
   }
 
   export const list: ListItem[] = [
-    {name: 'popularity (DESC)', sortProperty:'rating'},
-    {name: 'popularity (ASC)',  sortProperty:'-rating'},
-    {name: 'price (DESC)',         sortProperty:'price'},
-    {name: 'price (ASC)',          sortProperty:'-price'},
-    {name: 'ABC (DESC)',     sortProperty:'title'},
-    {name: 'ABC (ASC)',      sortProperty:'-title'},
+    {name: 'popularity (DESC)',sortProperty : SortPropertyEnam.RATING_DESC},
+    {name: 'popularity (ASC)', sortProperty:SortPropertyEnam.RATING_ASC},
+
+    {name: 'price (DESC)',     sortProperty: SortPropertyEnam.PRICE_DESC},
+    {name: 'price (ASC)',      sortProperty: SortPropertyEnam.PRICE_ASC},
+
+    {name: 'ABC (DESC)',       sortProperty: SortPropertyEnam.TITLE_DESC},
+    {name: 'ABC (ASC)',        sortProperty: SortPropertyEnam.TITLE_ASC},
    ];
 
   type SortProps = {
@@ -22,7 +24,7 @@ import { setSort, selectSort } from '../Redux/Slices/filterSlice'
     onChangeSort:any;
   }
 
-  export const Sort: React.FC<SortProps> = ({value, onChangeSort}) => {
+  export const SortPopup: React.FC<SortProps> = ({value, onChangeSort}) => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort)
   const sortRef = React.useRef<HTMLDivElement>(null);
@@ -88,4 +90,4 @@ import { setSort, selectSort } from '../Redux/Slices/filterSlice'
             </div>
   )};
 
-  export default Sort;
+  export default SortPopup;

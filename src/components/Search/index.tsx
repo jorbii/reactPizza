@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from "react";
 import debounce from "lodash.debounce";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearchValue } from "../../Redux/Slices/filterSlice";
+import { setSearchValue } from "../../Redux/Slices/filterSlice.ts";
 
 import styles from './Search.module.scss';
 
